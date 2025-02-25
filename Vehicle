@@ -46,6 +46,7 @@ class petrol(vehicle):
         if self.fl < fuel_consumed:
             print("cannot go upto that distance, please refill.!")
         self.fl -= fuel_consumed
+class semi_automatice(vehicle):
         
         
 v1 = electric('audi','q100','2020',100)
