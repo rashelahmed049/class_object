@@ -1,0 +1,52 @@
+#it is like giving importance to the methods, like the methods which are metnioned as abstract cannot be missed in any class
+from abc import ABC,abstractmethod
+class account(ABC):
+    def __init__(self):
+        self.balance = 0 
+    def add(self,amount):
+        if amount < 0:
+            print("Value cannot be negative")
+        else:
+            self.balance+= amount
+    @abstractmethod
+    def withdraw(self,amount):
+        pass
+    @abstractmethod
+    def display_balance(self):
+        pass
+class saving(account):
+    def display_balance(self):
+        print("Saving acc balance is :",self.balance)
+    def withdraw(self,amount):
+        if amount > self.balance:
+            print("Low balance!")
+        else:
+            self.balance-=amount
+class current(account):
+    def __init__(self):
+        super().__init__()
+        self.overdraft_limit = -1000
+    def display_balance(self):
+        print("Saving acc balance is :",self.balance)
+    def withdraw(self,amount):
+        if self.balance - amount < self.overdraft_limit:
+            print("Overdraft limit crossed, cannot withdraw!")
+            return
+        if amount > self.balance:
+            print("Low balance!")
+        else:
+            self.balance-=amount
+            
+
+def paybill(account,amount):
+    account.withdraw(amount)
+def display_balance(account):
+    account.display_balance()
+        
+        
+#ravi_account = saving()
+manoj_account = current()
+manoj_account.add(900)
+manoj_account.withdraw(2000)
+#ravi_account.add(900)
+#ravi_account.display_balance()
